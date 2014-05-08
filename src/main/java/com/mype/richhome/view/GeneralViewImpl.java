@@ -1,8 +1,6 @@
 package com.mype.richhome.view;
 
 import com.google.inject.Inject;
-import com.mype.richhome.vo.MonthVO;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -12,10 +10,18 @@ public class GeneralViewImpl extends AbstractView implements GeneralView {
     @Inject
     private GeneralViewMediator mediator;
 
-    private ListView<MonthVO>
+    @Inject
+    private MonthView monthView;
 
     @Override
     protected void constructView(final Pane viewPane) {
+        viewPane.getChildren().add(monthView.getView());
+
+        mediator.init();
+    }
+
+    @Override
+    public void loadMonths() {
 
     }
 }
