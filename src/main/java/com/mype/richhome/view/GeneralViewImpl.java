@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
  * @author Vitaliy Gerya
  */
 public class GeneralViewImpl extends AbstractView implements GeneralView {
+    private static final String VIEW_NAME = "generalView";
     @Inject
     private GeneralViewMediator mediator;
 
@@ -16,8 +17,14 @@ public class GeneralViewImpl extends AbstractView implements GeneralView {
     @Override
     protected void constructView(final Pane viewPane) {
         viewPane.getChildren().add(monthView.getView());
+        monthView.getView().setId(".monthView");
 
         mediator.init();
+    }
+
+    @Override
+    protected String getViewName() {
+        return VIEW_NAME;
     }
 
     @Override

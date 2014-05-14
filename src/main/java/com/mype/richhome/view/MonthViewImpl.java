@@ -18,6 +18,9 @@ import java.util.List;
  * @author Vitaliy Gerya
  */
 public class MonthViewImpl extends AbstractView implements MonthView {
+
+    private static final String VIEW_NAME = "monthView";
+
     @Inject
     private MonthViewMediator mediator;
 
@@ -26,9 +29,19 @@ public class MonthViewImpl extends AbstractView implements MonthView {
 
     protected void constructView(final Pane viewPane) {
         monthList.setCellFactory(new MonthRenderer());
+        monthList.setId("monthList");
         viewPane.getChildren().add(monthList);
 
         mediator.loadMonthList();
+    }
+
+    @Override
+    protected String getViewName() {
+        return VIEW_NAME;
+    }
+
+    public void setMediator(final MonthViewMediator mediator) {
+        this.mediator = mediator;
     }
 
     @Override

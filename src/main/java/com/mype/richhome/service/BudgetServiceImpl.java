@@ -1,5 +1,7 @@
 package com.mype.richhome.service;
 
+import com.google.inject.Inject;
+import com.mype.richhome.persistence.dao.BudgetDao;
 import com.mype.richhome.vo.MonthVO;
 
 import java.time.LocalDate;
@@ -11,6 +13,9 @@ import java.util.List;
  * @author Vitaliy Gerya
  */
 public class BudgetServiceImpl implements BudgetService {
+    @Inject
+    private BudgetDao dao;
+
     @Override
     public List<MonthVO> loadMonths() {
         // FIXME
