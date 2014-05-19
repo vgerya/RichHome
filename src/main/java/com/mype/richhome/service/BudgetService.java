@@ -1,6 +1,6 @@
 package com.mype.richhome.service;
 
-import com.mype.richhome.vo.MonthVO;
+import com.mype.richhome.ui.vo.MonthVO;
 
 import java.util.List;
 

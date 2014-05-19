@@ -1,8 +1,8 @@
-package com.mype.richhome.command;
+package com.mype.richhome.ui.command;
 
 import com.google.inject.Inject;
 import com.mype.richhome.service.BudgetService;
-import com.mype.richhome.vo.MonthVO;
+import com.mype.richhome.ui.vo.MonthVO;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 

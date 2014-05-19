@@ -1,4 +1,4 @@
-package com.mype.richhome.view;
+package com.mype.richhome.ui.view;
 
 /**
  * @author Vitaliy Gerya

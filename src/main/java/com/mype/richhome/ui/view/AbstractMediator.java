@@ -1,7 +1,7 @@
-package com.mype.richhome.view;
+package com.mype.richhome.ui.view;
 
 import com.google.inject.Inject;
-import com.mype.richhome.command.CommandProvider;
+import com.mype.richhome.ui.command.CommandProvider;
 import javafx.concurrent.Service;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;

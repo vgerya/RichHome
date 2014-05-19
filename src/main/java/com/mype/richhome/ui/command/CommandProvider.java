@@ -1,4 +1,4 @@
-package com.mype.richhome.command;
+package com.mype.richhome.ui.command;
 
 import javafx.concurrent.Service;
 

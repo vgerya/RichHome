@@ -1,4 +1,4 @@
-package com.mype.richhome.vo;
+package com.mype.richhome.ui.vo;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,7 +28,7 @@ public class MonthVO {
 
     @Override
     public String toString() {
-        return "com.mype.richhome.vo.MonthVO{" +
+        return "com.mype.richhome.ui.vo.MonthVO{" +
                 "month=" + month.getValue().getMonth() + "-" + month.getValue().getYear() +
                 '}';
     }

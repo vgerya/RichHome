@@ -2,7 +2,7 @@ package com.mype.richhome.service;
 
 import com.google.inject.Inject;
 import com.mype.richhome.persistence.dao.BudgetDao;
-import com.mype.richhome.vo.MonthVO;
+import com.mype.richhome.ui.vo.MonthVO;
 
 import java.time.LocalDate;
 import java.time.Month;

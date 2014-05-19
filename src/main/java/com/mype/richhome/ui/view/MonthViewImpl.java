@@ -1,7 +1,7 @@
-package com.mype.richhome.view;
+package com.mype.richhome.ui.view;
 
 import com.google.inject.Inject;
-import com.mype.richhome.vo.MonthVO;
+import com.mype.richhome.ui.vo.MonthVO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
