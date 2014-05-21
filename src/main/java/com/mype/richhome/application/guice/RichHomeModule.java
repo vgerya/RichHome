@@ -6,9 +6,6 @@ import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
-import com.mype.richhome.ui.command.CommandProvider;
-import com.mype.richhome.ui.command.CommandProviderImpl;
-import com.mype.richhome.ui.command.LoadMonthsCommand;
 import com.mype.richhome.persistence.EntityManager;
 import com.mype.richhome.persistence.JSONEntityManager;
 import com.mype.richhome.persistence.dao.BudgetDao;
@@ -17,9 +14,15 @@ import com.mype.richhome.preferences.Preferences;
 import com.mype.richhome.preferences.PreferencesImpl;
 import com.mype.richhome.service.BudgetService;
 import com.mype.richhome.service.BudgetServiceImpl;
+import com.mype.richhome.ui.command.CommandProvider;
+import com.mype.richhome.ui.command.CommandProviderImpl;
+import com.mype.richhome.ui.command.LoadMonthsCommand;
 import com.mype.richhome.ui.view.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @author Vitaliy Gerya
@@ -63,6 +66,9 @@ public class RichHomeModule extends AbstractModule {
     }
 
     private void mapInfrastructure() {
+        // Binds our resource bundle that contains localized Strings
+        bind(ResourceBundle.class).toInstance(ResourceBundle.getBundle("bundles.messages", Locale.getDefault()));
+
         bind(Preferences.class).to(PreferencesImpl.class);
     }
 
@@ -73,6 +79,8 @@ public class RichHomeModule extends AbstractModule {
     }
 
     private void mapViews() {
+//        install(new FactoryModuleBuilder().implement(ListCell.class, MonthCell.class).build(MonthCellFactory.class));
+
         bind(GeneralView.class).to(GeneralViewImpl.class);
         bind(MonthView.class).to(MonthViewImpl.class);
     }
