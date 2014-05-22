@@ -5,36 +5,49 @@ import com.mype.richhome.ui.vo.MonthVO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import org.tbee.javafx.scene.layout.MigPane;
 
 import java.util.List;
 
 /**
  * @author Vitaliy Gerya
  */
-public class MonthViewImpl extends AbstractView implements MonthView {
-    private static final String VIEW_NAME = "monthView";
-
+public class MonthViewImpl implements MonthView {
     @Inject
     private MonthCellFactory monthCellFactory;
 
     @Inject
     private MonthViewMediator mediator;
 
+    private MigPane rootPane;
+
     private final ObservableList<MonthVO> data = FXCollections.observableArrayList();
-    private ListView<MonthVO> monthList = new ListView<>(data);
-
-    protected void constructView(final Pane viewPane) {
-        monthList.setCellFactory(monthCellFactory);
-        monthList.setId("monthList");
-        viewPane.getChildren().add(monthList);
-
-        mediator.loadMonthList();
-    }
+    private final ListView<MonthVO> monthList = new ListView<>(data);
 
     @Override
-    protected String getViewName() {
-        return VIEW_NAME;
+    public Pane getView() {
+        if (rootPane == null) {
+            this.rootPane = new MigPane("insets 0", "[grow, fill]", "[grow, fill]");
+
+            constructView();
+        }
+
+        return rootPane;
+    }
+
+    protected void constructView() {
+        monthList.setCellFactory(monthCellFactory);
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(monthList);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
+        rootPane.add(scrollPane, "grow");
+
+        mediator.loadMonthList();
     }
 
     public void setMediator(final MonthViewMediator mediator) {

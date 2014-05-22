@@ -79,15 +79,15 @@ public class RichHomeModule extends AbstractModule {
     }
 
     private void mapViews() {
-//        install(new FactoryModuleBuilder().implement(ListCell.class, MonthCell.class).build(MonthCellFactory.class));
-
         bind(GeneralView.class).to(GeneralViewImpl.class);
         bind(MonthView.class).to(MonthViewImpl.class);
+        bind(DetailView.class).to(DetailViewImpl.class);
     }
 
     private void mapMediators() {
         bind(GeneralViewMediator.class).to(GeneralViewMediatorImpl.class);
         bind(MonthViewMediator.class).to(MonthViewMediatorImpl.class);
+        bind(DetailViewMediator.class).to(DetailViewMediatorImpl.class);
     }
 
     private void mapModels() {

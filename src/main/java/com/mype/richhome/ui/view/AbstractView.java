@@ -6,13 +6,12 @@ import javafx.scene.layout.Pane;
  * @author Vitaliy Gerya
  */
 public abstract class AbstractView implements View {
-    private Pane viewPane;
+    protected Pane viewPane;
 
     @Override
     public Pane getView() {
         if (viewPane == null) {
             this.viewPane = new Pane();
-            this.viewPane.setId(getViewName());
 
             constructView(viewPane);
         }
@@ -21,6 +20,4 @@ public abstract class AbstractView implements View {
     }
 
     protected abstract void constructView(final Pane viewPane);
-
-    protected abstract String getViewName();
 }
