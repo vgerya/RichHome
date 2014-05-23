@@ -27,7 +27,7 @@ public class RichHome extends Application {
         Injector injector = Guice.createInjector(new RichHomeModule());
         GeneralView generalView = injector.getInstance(GeneralViewImpl.class);
         Scene scene = new Scene(this.generalView = generalView.getView());
-        scene.getStylesheets().add(RichHome.class.getResource("/fx/css/GeneralView.css").toExternalForm());
+        scene.getStylesheets().addAll(RichHome.class.getResource("/fx/css/GeneralView.css").toExternalForm());
 
 //        this.generalView.prefWidthProperty().bind(scene.widthProperty());
 //        this.generalView.prefHeightProperty().bind(scene.heightProperty());

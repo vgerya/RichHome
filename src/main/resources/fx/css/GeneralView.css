@@ -5,3 +5,15 @@
     -fx-stroke-dash-offset: 6;
     -fx-stroke-line-cap: butt;
 }
+
+.tab-button {
+    -fx-border-color: rgb(49, 89, 23);
+    -fx-border-radius: 5;
+    -fx-padding: 2 2 2 2;
+    -fx-text-fill: blue;
+}
+
+.tab-button:selected {
+    -fx-fill: gray;
+    -fx-padding: 0px;
+}

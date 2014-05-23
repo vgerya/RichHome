@@ -1,9 +1,7 @@
 package com.mype.richhome.ui.view;
 
 import com.mype.richhome.ui.vo.MonthVO;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import org.tbee.javafx.scene.layout.MigPane;
@@ -17,14 +15,14 @@ import java.util.ResourceBundle;
 public class MonthCell extends ListCell<MonthVO> {
     private ResourceBundle resourceBundle;
 
-    private final MigPane rootPane = new MigPane("insets 0", "[grow][grow]", "[]");
+    private final MigPane rootPane = new MigPane("insets 0", "[grow][fill, grow, align right]", "[fill, grow]");
 
     private final MigPane labelsPane = new MigPane("insets 0", "[fill, grow]", "[][]");
     private final Label monthLabel = new Label("May");
     private final Label yearLabel = new Label("1234");
 
-    private final MigPane tabsPane = new MigPane("insets 0", "[]", "[][][]");
-    private final Button planButton = new Button();
+    private final MigPane tabsPane = new MigPane("insets 0", "[fill]", "[]0[]0[]");
+    private final ToggleButton planButton = new ToggleButton();
     private final Button currentButton = new Button();
     private final Button totalButton = new Button();
 
@@ -40,12 +38,12 @@ public class MonthCell extends ListCell<MonthVO> {
         labelsPane.add(yearLabel, "w pref!, growx, wrap");
         rootPane.add(labelsPane, "w pref!");
 
-        planButton.setText(resourceBundle.getString("monthlist.cell.planTab"));
-        tabsPane.add(planButton, "w pref!, wrap");
-        currentButton.setText(resourceBundle.getString("monthlist.cell.currentTab"));
-        tabsPane.add(currentButton, "w pref!, wrap");
-        totalButton.setText(resourceBundle.getString("monthlist.cell.totalTab"));
-        tabsPane.add(totalButton, "w pref!, wrap");
+        constructButton(planButton, resourceBundle.getString("monthlist.cell.planTab"));
+        tabsPane.add(planButton, "wrap");
+        constructButton(currentButton, resourceBundle.getString("monthlist.cell.currentTab"));
+        tabsPane.add(currentButton, "wrap");
+        constructButton(totalButton, resourceBundle.getString("monthlist.cell.totalTab"));
+        tabsPane.add(totalButton, "wrap");
 
         tabsPane.getStyleClass().add("test-border");
         rootPane.add(tabsPane, "w pref!");
@@ -58,6 +56,12 @@ public class MonthCell extends ListCell<MonthVO> {
         );
 
         getChildren().add(rootPane);
+    }
+
+    private void constructButton(final ButtonBase button, final String text) {
+        button.setText(text);
+        button.getStyleClass().add("tab-button");
+        button.applyCss();
     }
 
     @Override
