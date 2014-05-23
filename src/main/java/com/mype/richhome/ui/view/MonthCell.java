@@ -1,8 +1,11 @@
 package com.mype.richhome.ui.view;
 
 import com.mype.richhome.ui.vo.MonthVO;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import org.tbee.javafx.scene.layout.MigPane;
 
 import java.time.format.DateTimeFormatter;
@@ -21,9 +24,9 @@ public class MonthCell extends ListCell<MonthVO> {
     private final Label yearLabel = new Label("1234");
 
     private final MigPane tabsPane = new MigPane("insets 0", "[]", "[][][]");
-    private final Label planLabel = new Label();
-    private final Label currentLabel = new Label();
-    private final Label totalLabel = new Label();
+    private final Button planButton = new Button();
+    private final Button currentButton = new Button();
+    private final Button totalButton = new Button();
 
     public MonthCell() {
     }
@@ -37,14 +40,22 @@ public class MonthCell extends ListCell<MonthVO> {
         labelsPane.add(yearLabel, "w pref!, growx, wrap");
         rootPane.add(labelsPane, "w pref!");
 
-        planLabel.setText(resourceBundle.getString("monthlist.cell.planTab"));
-        tabsPane.add(planLabel, "w pref!, wrap");
-        currentLabel.setText(resourceBundle.getString("monthlist.cell.currentTab"));
-        tabsPane.add(currentLabel, "w pref!, wrap");
-        totalLabel.setText(resourceBundle.getString("monthlist.cell.totalTab"));
-        tabsPane.add(totalLabel, "w pref!, wrap");
+        planButton.setText(resourceBundle.getString("monthlist.cell.planTab"));
+        tabsPane.add(planButton, "w pref!, wrap");
+        currentButton.setText(resourceBundle.getString("monthlist.cell.currentTab"));
+        tabsPane.add(currentButton, "w pref!, wrap");
+        totalButton.setText(resourceBundle.getString("monthlist.cell.totalTab"));
+        tabsPane.add(totalButton, "w pref!, wrap");
+
         tabsPane.getStyleClass().add("test-border");
         rootPane.add(tabsPane, "w pref!");
+
+        rootPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                if(event.getButton() == MouseButton.PRIMARY) {
+                    System.out.println(event.getSource());
+                }
+            }
+        );
 
         getChildren().add(rootPane);
     }
