@@ -22,15 +22,8 @@ dependencies {
     // UI
     compile 'com.miglayout:miglayout-javafx:4.2'
 
-    // JSON with JAXB
-    // the core, which includes Streaming API, shared low-level abstractions (but NOT data-binding)
-    compile 'com.fasterxml.jackson.core:jackson-core:2.3.2'
-    // Just the annotations; use this dependency if you want to attach annotations to classes without connecting them to the code.
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.3.2'
-    // databinding; ObjectMapper, JsonNode and related classes are here
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
-    // Support for JAX-B annotations as additional configuration
-    compile 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.3.2'
+    // JSON
+    compile 'com.google.code.gson:gson:2.2.4'
 
     testCompile 'junit:junit:4.11'
     testCompile 'org.mockito:mockito-all:1.9.5'
