@@ -21,4 +21,17 @@ public class MonthViewMediatorImpl extends AbstractMediator implements MonthView
             view.updateMonthList((List<MonthVO>) source.getValue());
         });
     }
+
+    @Override
+    public void selectMonth(final MonthVO selectedItem) {
+        startCommand(LoadMonthsCommand.class, (event) -> {
+            // TODO detect kind of selection (skip or process it)
+            // unselect previous tab or automatically select the same kind of tab on next Month
+            // load appropriate data and put to the interface
+            Worker source = event.getSource();
+            view.updateMonthList((List<MonthVO>) source.getValue());
+        }, (event) -> {
+            // TODO select previous selection with reload of information
+        });
+    }
 }

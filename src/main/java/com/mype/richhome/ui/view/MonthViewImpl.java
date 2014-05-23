@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import org.tbee.javafx.scene.layout.MigPane;
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
@@ -39,6 +40,9 @@ public class MonthViewImpl implements MonthView {
 
     protected void constructView() {
         monthList.setCellFactory(monthCellFactory);
+        monthList.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            mediator.selectMonth(monthList.getSelectionModel().getSelectedItem());
+        });
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(monthList);

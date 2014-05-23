@@ -12,7 +12,7 @@ import javafx.event.EventHandler;
 public abstract class AbstractMediator {
     private final static EventHandler<WorkerStateEvent> DEFAULT_ERROR_HANDLER = (event) -> {
         System.out.println("Error" + event);
-        if(event.getSource() instanceof Service) {
+        if (event.getSource() instanceof Service) {
             Service service = (Service) event.getSource();
             service.getException().printStackTrace();
         }
@@ -25,6 +25,16 @@ public abstract class AbstractMediator {
         final T commandInstance = commandProvider.get(commandClass);
         commandInstance.setOnSucceeded(succeedHandler);
         commandInstance.setOnFailed(DEFAULT_ERROR_HANDLER);
+
+        commandInstance.start();
+
+        return commandInstance;
+    }
+
+    protected <T extends Service> T startCommand(Class<T> commandClass, EventHandler<WorkerStateEvent> succeedHandler, EventHandler<WorkerStateEvent> failHandler) {
+        final T commandInstance = commandProvider.get(commandClass);
+        commandInstance.setOnSucceeded(succeedHandler);
+        commandInstance.setOnFailed(failHandler);
 
         commandInstance.start();
 
