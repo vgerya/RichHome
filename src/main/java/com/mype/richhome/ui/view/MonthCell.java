@@ -1,8 +1,9 @@
 package com.mype.richhome.ui.view;
 
 import com.mype.richhome.ui.vo.MonthVO;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import org.tbee.javafx.scene.layout.MigPane;
 
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
  * @author Vitaliy Gerya
  */
 public class MonthCell extends ListCell<MonthVO> {
+    private final ListView<MonthVO> list;
     private ResourceBundle resourceBundle;
 
     private final MigPane rootPane = new MigPane("insets 0", "[grow][fill, grow, align right]", "[fill, grow]");
@@ -26,7 +28,8 @@ public class MonthCell extends ListCell<MonthVO> {
     private final Button currentButton = new Button();
     private final Button totalButton = new Button();
 
-    public MonthCell() {
+    public MonthCell(final ListView<MonthVO> list) {
+        this.list = list;
     }
 
     public void placeElements() {
@@ -40,22 +43,33 @@ public class MonthCell extends ListCell<MonthVO> {
 
         constructButton(planButton, resourceBundle.getString("monthlist.cell.planTab"));
         tabsPane.add(planButton, "wrap");
+        planButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new ButtonSelected(MonthViewImpl.PLAN_SELECTED, list));
         constructButton(currentButton, resourceBundle.getString("monthlist.cell.currentTab"));
         tabsPane.add(currentButton, "wrap");
+        currentButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new ButtonSelected(MonthViewImpl.CURRENT_SELECTED, list));
         constructButton(totalButton, resourceBundle.getString("monthlist.cell.totalTab"));
+        totalButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new ButtonSelected(MonthViewImpl.TOTAL_SELECTED, list));
         tabsPane.add(totalButton, "wrap");
 
         tabsPane.getStyleClass().add("test-border");
         rootPane.add(tabsPane, "w pref!");
 
-        rootPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if(event.getButton() == MouseButton.PRIMARY) {
-                    System.out.println(event.getSource());
-                }
-            }
-        );
-
         getChildren().add(rootPane);
+    }
+
+    private static class ButtonSelected implements EventHandler<MouseEvent> {
+        public final EventType<MonthViewImpl.MonthClickEvent>  eventType;
+        private final ListView<MonthVO> list;
+
+        public ButtonSelected(EventType<MonthViewImpl.MonthClickEvent> eventType, ListView<MonthVO> list) {
+            this.eventType = eventType;
+            this.list = list;
+        }
+
+        @Override
+        public void handle(final MouseEvent event) {
+            list.fireEvent(new MonthViewImpl.MonthClickEvent(eventType));
+        }
     }
 
     private void constructButton(final ButtonBase button, final String text) {

@@ -16,8 +16,8 @@ public class MonthCellFactory implements Callback<ListView<MonthVO>, ListCell<Mo
     private ResourceBundle resourceBundle;
 
     @Override
-    public ListCell<MonthVO> call(final ListView<MonthVO> param) {
-        MonthCell monthCell = new MonthCell();
+    public ListCell<MonthVO> call(final ListView<MonthVO> list) {
+        MonthCell monthCell = new MonthCell(list);
         monthCell.setResourceBundle(resourceBundle);
         monthCell.placeElements();
 
